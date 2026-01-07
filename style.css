@@ -1,11 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+
 body {
     margin: 0;
     overflow: hidden;
-    background-color: #2d2d2d;
-    /* Dark Grey Theme */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    /* Text color for visibility on dark bg */
+    background-color: black;
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    color: #0F0;
+    /* Matrix Green */
+}
+
+/* Matrix Rain Canvas */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Behind modal, above body bg */
 }
 
 .overlay {
@@ -14,7 +26,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Removed dark overlay background to keep it cleaner or make it very subtle if needed */
     background: transparent;
     display: flex;
     justify-content: center;
@@ -23,39 +34,90 @@ body {
 }
 
 .modal {
-    background: rgba(255, 255, 255, 0.1);
-    /* Semi-transparent */
-    backdrop-filter: blur(5px);
-    padding: 2rem;
-    border-radius: 15px;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    color: white;
+    border: none;
+    box-shadow: none;
+    color: #0F0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.buttons {
-    margin-top: 1.5rem;
+h1.matrix-text {
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px #0F0, 0 0 20px #0F0;
+    margin-bottom: 2rem;
+    z-index: 10;
+}
+
+.morpheus-container {
+    position: relative;
+    width: 600px;
+    /* Adjust based on image ratio */
+    max-width: 90%;
     display: flex;
-    gap: 1rem;
     justify-content: center;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.2s;
+#morpheus-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.2));
 }
 
-button:hover {
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.2);
+.pill-choice {
+    position: absolute;
+    top: 65%;
+    /* Adjust to match hands */
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px black;
+}
+
+/* 
+    User said: 
+    "sağ elinde Mavi Hapın üstünde Ömer yazsın" (Morpheus right hand? Standard image right hand holds Red. Viewer right holds Blue.)
+    "sol elinde Kırmızı Hapın üstünde Orhan yazsın" (Morpheus left hand? Viewer left holds Red)
+    
+    Standard Morpheus Image:
+    Viewer Left (Morpheus Right Hand): Red Pill
+    Viewer Right (Morpheus Left Hand): Blue Pill
+    
+    So User wants:
+    Viewer Left (Red Pill): Orhan
+    Viewer Right (Blue Pill): Ömer
+*/
+
+.red-pill {
+    /* Viewer Left */
+    left: 18%;
+    color: red;
+    text-shadow: 0 0 10px red;
+}
+
+.blue-pill {
+    /* Viewer Right */
+    right: 18%;
+    color: cyan;
+    text-shadow: 0 0 10px cyan;
+}
+
+.pill-choice:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 20px currentColor;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 /* Flashbang specific styles */

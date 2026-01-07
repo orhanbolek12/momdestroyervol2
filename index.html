@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kim Geldi?</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas"></canvas>
 
     <!-- Question Modal -->
     <div id="modal-overlay" class="overlay">
         <div class="modal">
-            <h1>Siteye Orhan mı girdi Ömer mi?</h1>
-            <div class="buttons">
-                <button id="btn-orhan">Orhan</button>
-                <button id="btn-omer">Ömer</button>
+            <h1 class="matrix-text">Siteye Orhan mı girdi Ömer mi?</h1>
+            <div class="morpheus-container">
+                <img src="assets/morpheus.png" alt="Morpheus" id="morpheus-img">
+                <div class="pill-choice red-pill" id="btn-orhan">Orhan</div>
+                <div class="pill-choice blue-pill" id="btn-omer">Ömer</div>
             </div>
         </div>
     </div>
@@ -27,4 +33,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
