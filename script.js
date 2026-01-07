@@ -76,6 +76,37 @@ function playExplosionSound() {
     osc.stop(t + 5);
 }
 
+function playSeaLionSound() {
+    if (!audioCtx) return;
+    const t = audioCtx.currentTime;
+
+    // Sea lion "Arp-Arp-Arp" effect
+    // Rapid bursts of saw/square wave with pitch bending down
+    const count = 5;
+    const duration = 0.4;
+
+    for (let i = 0; i < count; i++) {
+        const start = t + (i * 0.5);
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sawtooth';
+        // Pitch envelope: High to Low
+        osc.frequency.setValueAtTime(400, start);
+        osc.frequency.exponentialRampToValueAtTime(150, start + duration);
+
+        // Amplitude envelope: Attack, Decay
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(0.3, start + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.01, start + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+    }
+}
+
 // --- Orhan Mode (Flashbang) ---
 function startOrhanMode() {
     initAudio();
@@ -175,6 +206,13 @@ function triggerExplosion(grenadeElement, platformElement) {
 function startOmerMode(e) {
     if (e) e.stopPropagation(); // Stop click from bubbling to window immediately
 
+    initAudio(); // Ensure audio context is ready
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    playSeaLionSound(); // Play sound effect
+
     modalOverlay.style.display = 'none';
     tunas = []; // Clear array
 
@@ -185,7 +223,7 @@ function startOmerMode(e) {
 
         // Determine size based on screen width (matching CSS media query)
         const isMobile = window.innerWidth <= 600;
-        const size = isMobile ? 80 : 120;
+        const size = isMobile ? 150 : 250; // UPDATED SIZES
         const radius = size / 2;
 
         // Ensure they spawn within bounds with new size
@@ -209,6 +247,11 @@ function startOmerMode(e) {
 
     // Click anywhere to reset
     window.addEventListener('click', resetGameOnce);
+
+    // Auto reset after 10 seconds
+    setTimeout(() => {
+        resetGameOnce();
+    }, 10000);
 }
 
 function resetGameOnce() {

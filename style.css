@@ -110,7 +110,7 @@ button:hover {
 /* Tuna specific styles */
 .tuna {
     position: absolute;
-    width: 120px;
+    width: 250px;
     /* Adjust based on image */
     z-index: 500;
     user-select: none;
@@ -132,7 +132,7 @@ button:hover {
     }
 
     .tuna {
-        width: 80px;
+        width: 150px;
         /* Smaller tuna on mobile */
     }
 
