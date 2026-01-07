@@ -126,6 +126,9 @@ function playExplosionSound() {
 }
 
 function playSeaLionSound() {
+    const audio = new Audio('assets/sea_lion.mp3');
+    audio.play().catch(e => console.error("Audio play failed", e));
+    /*
     if (!audioCtx) return;
     const t = audioCtx.currentTime;
 
@@ -154,6 +157,7 @@ function playSeaLionSound() {
         osc.start(start);
         osc.stop(start + duration);
     }
+*/
 }
 
 // --- Orhan Mode (Flashbang) ---
