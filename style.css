@@ -115,3 +115,31 @@ button:hover {
     z-index: 500;
     user-select: none;
 }
+
+@media (max-width: 600px) {
+    .modal {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 1.2rem;
+    }
+
+    .tuna {
+        width: 80px;
+        /* Smaller tuna on mobile */
+    }
+
+    .platform {
+        width: 150px !important;
+        /* Smaller platform */
+        left: calc(50% - 75px) !important;
+        /* Center it */
+    }
+}

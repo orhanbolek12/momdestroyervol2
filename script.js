@@ -183,9 +183,14 @@ function startOmerMode(e) {
         tuna.src = 'assets/tuna.png';
         tuna.classList.add('tuna');
 
-        // Random start position (avoid excessive overlap ideally, but random is okay for now)
-        const x = Math.random() * (window.innerWidth - 150);
-        const y = Math.random() * (window.innerHeight - 150);
+        // Determine size based on screen width (matching CSS media query)
+        const isMobile = window.innerWidth <= 600;
+        const size = isMobile ? 80 : 120;
+        const radius = size / 2;
+
+        // Ensure they spawn within bounds with new size
+        const x = Math.random() * (window.innerWidth - size);
+        const y = Math.random() * (window.innerHeight - size);
 
         tuna.style.left = x + 'px';
         tuna.style.top = y + 'px';
@@ -197,7 +202,7 @@ function startOmerMode(e) {
         const vx = Math.cos(angle) * speed;
         const vy = Math.sin(angle) * speed;
 
-        tunas.push({ el: tuna, x, y, vx, vy, width: 120, height: 120, radius: 60 });
+        tunas.push({ el: tuna, x, y, vx, vy, width: size, height: size, radius: radius });
     }
 
     animateTunas();
